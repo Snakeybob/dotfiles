@@ -1,213 +1,102 @@
+# Use custom format
+format = """
+[â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ ](bold cyan)$time$os
+[â”‚](bold cyan)\
+$username$hostname$localip$directory\
+$git_branch$git_state$git_status$git_commit$git_metrics
+[â”‚](bold cyan)\
+$python$rust\
+$docker_context$package$memory_usage$cmd_duration$status$battery\
+$container$shell
+[â”” ](bold cyan)$character
+"""
+
 [character]
-success_symbol = "[>](bold green)"
+success_symbol = "[>](bold cyan)"
 error_symbol = "[x](bold red)"
-vimcmd_symbol = "[<](bold green)"
+vimcmd_symbol = "[<](bold cyan)"
 
-[git_commit]
-tag_symbol = " tag "
-
-[git_status]
-ahead = ">"
-behind = "<"
-diverged = "<>"
-renamed = "r"
-deleted = "x"
-
-[aws]
-symbol = "aws "
-
-[azure]
-symbol = "az "
-
-[bun]
-symbol = "bun "
-
-[c]
-symbol = "C "
-
-[cobol]
-symbol = "cobol "
-
-[conda]
-symbol = "conda "
-
-[crystal]
-symbol = "cr "
-
-[cmake]
-symbol = "cmake "
-
-[daml]
-symbol = "daml "
-
-[dart]
-symbol = "dart "
-
-[deno]
-symbol = "deno "
-
-[dotnet]
-symbol = ".NET "
+[cmd_duration]
+format = "( [$duration]($style))"
+disabled = false
 
 [directory]
-read_only = " ro"
+truncation_length = 8
+truncation_symbol = "â€¦/"
+format = "( [$path]($style)[$read_only]($read_only_style))"
+style = "bold cyan"
+repo_root_format = "( [$before_root_path]($repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style))"
+repo_root_style = "bold white"
 
 [docker_context]
+format = "( [$symbol$context]($style))"
 symbol = "docker "
-
-[elixir]
-symbol = "exs "
-
-[elm]
-symbol = "elm "
-
-[fennel]
-symbol = "fnl "
-
-[fossil_branch]
-symbol = "fossil "
-
-[gcloud]
-symbol = "gcp "
+disabled = false
 
 [git_branch]
+format = "( [$symbol$branch(:$remote_branch)]($style))"
 symbol = "git "
 
-[golang]
-symbol = "go "
+[git_commit]
+format = "( [$hash$tag]($style))"
+tag_symbol = "tag "
 
-[gradle]
-symbol = "gradle "
+[git_metrics]
+format = "( [+$added]($added_style)[-$deleted]($deleted_style))"
+disabled = false
 
-[guix_shell]
-symbol = "guix "
+[git_state]
+format = "( [$state($progress_current/$progress_total)]($style))"
 
-[hg_branch]
-symbol = "hg "
+[git_status]
+format = "( [$all_status$ahead_behind]($style))"
 
-[java]
-symbol = "java "
+[hostname]
+ssh_only = false
+ssh_symbol = "ðŸŒ� "
+format = "( [$ssh_symbol$hostname]($style))"
+style = "bold yellow"
+disabled = false
 
-[julia]
-symbol = "jl "
-
-[kotlin]
-symbol = "kt "
+[localip]
+ssh_only = true 
+format = "@[$localipv4]($style)"
+style = "bold purple"
+disabled = false
 
 [lua]
 symbol = "lua "
 
-[nodejs]
-symbol = "nodejs "
-
 [memory_usage]
+format = "( [$symbol$ram|$swap]($style))"
 symbol = "memory "
+disabled = false
 
-[meson]
-symbol = "meson "
-
-[nim]
-symbol = "nim "
-
-[nix_shell]
-symbol = "nix "
-
-[ocaml]
-symbol = "ml "
-
-[opa]
-symbol = "opa "
-
-[os.symbols]
-Alpaquita = "alq "
-Alpine = "alp "
-Amazon = "amz "
-Android = "andr "
-Arch = "rch "
-Artix = "atx "
-CentOS = "cent "
-Debian = "deb "
-DragonFly = "dfbsd "
-Emscripten = "emsc "
-EndeavourOS = "ndev "
-Fedora = "fed "
-FreeBSD = "fbsd "
-Garuda = "garu "
-Gentoo = "gent "
-HardenedBSD = "hbsd "
-Illumos = "lum "
-Linux = "lnx "
-Mabox = "mbox "
-Macos = "mac "
-Manjaro = "mjo "
-Mariner = "mrn "
-MidnightBSD = "mid "
-Mint = "mint "
-NetBSD = "nbsd "
-NixOS = "nix "
-OpenBSD = "obsd "
-OpenCloudOS = "ocos "
-openEuler = "oeul "
-openSUSE = "osuse "
-OracleLinux = "orac "
-Pop = "pop "
-Raspbian = "rasp "
-Redhat = "rhl "
-RedHatEnterprise = "rhel "
-Redox = "redox "
-Solus = "sol "
-SUSE = "suse "
-Ubuntu = "ubnt "
-Unknown = "unk "
-Windows = "win "
+[os]
+format = "( [$name$version]($style))"
+style = "bold blue"
+disabled = false
 
 [package]
+format = "( [$symbol$version]($style))"
 symbol = "pkg "
-
-[perl]
-symbol = "pl "
-
-[php]
-symbol = "php "
-
-[pijul_channel]
-symbol = "pijul "
-
-[pulumi]
-symbol = "pulumi "
-
-[purescript]
-symbol = "purs "
+disabled = false
 
 [python]
+format = "( [$symbol$version]($style))( [$virtualenv]($style))"
 symbol = "py "
 
-[raku]
-symbol = "raku "
-
-[ruby]
-symbol = "rb "
-
 [rust]
+format = "( [$symbol$version]($style))"
 symbol = "rs "
 
-[scala]
-symbol = "scala "
+[time]
+format = "( [$time]($style))"
+disabled = false
 
-[spack]
-symbol = "spack "
-
-[status]
-symbol = "[x](bold red) "
-
-[sudo]
-symbol = "sudo "
-
-[swift]
-symbol = "swift "
-
-[terraform]
-symbol = "terraform "
-
-[zig]
-symbol = "zig "
+[username]
+style_user = 'bold green'
+style_root = 'bold red'
+format = '( [$user]($style))'
+disabled = false
+show_always = true
